@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: devopslifter/dotnet-core-hello-world
+  repository: devopslifter/hello-appvia-demo:v0.1
   tag: v1.0
   pullPolicy: IfNotPresent
 
@@ -40,13 +40,13 @@ ingress:
     kubernetes.io/tls-acme: "true"
     cert-manager.io/cluster-issuer: le-prod
   hosts:
-    - host: hello.tomf-demo-eks-development.tomf-demo.teams.demo.kore.appvia.io
+    - host: demo.demo-eks.demo.teams.demo.kore.appvia.io
       paths:
         - /
   tls:
     - secretName: dotnet-hello-world-tls
       hosts:
-        - hello.tomf-demo-eks-development.tomf-demo.teams.demo.kore.appvia.io
+        - demo.demo-eks.demo.teams.demo.kore.appvia.io
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
