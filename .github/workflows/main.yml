@@ -27,10 +27,10 @@ jobs:
 
       - name: Build an image from Dockerfile
         run: |
-          docker build -t docker.io/appvia/hello-appvia-demo:${{ github.sha }} .
+          docker build -t docker.io/devopslifter/hello-appvia-demo:${{ github.sha }} .
         working-directory: dotnet-hello-world
         
       - name: Push an image to Docker Hub
         run: |
-          docker push docker.io/appvia/hello-appvia-demo:${{ github.sha }}
+          docker push docker.io/devopslifter/hello-appvia-demo:${{ github.sha }}
         working-directory: dotnet-hello-world
