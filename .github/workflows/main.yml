@@ -1,0 +1,36 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+    paths:
+    - 'dotnet-hello-world/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+    - 'dotnet-hello-world/**'
+jobs:
+  build_push_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get branch name
+        if: github.event_name != 'pull_request'
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
+
+      - name: Get branch name on pull request
+        if: github.event_name == 'pull_request'
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF#refs/heads/})" >> $GITHUB_ENV
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build an image from Dockerfile
+        run: |
+          docker build -t docker.io/appvia/devopslifter:${{ github.sha }} .
+        working-directory: dotnet-hello-world
+        
+      - name: Push an image to Docker Hub
+        run: |
+          docker push docker.io/appvia/devopslifter:${{ github.sha }}
+        working-directory: dotnet-hello-world
