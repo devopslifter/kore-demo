@@ -1,3 +1,4 @@
+---
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
@@ -17,5 +18,5 @@ spec:
   values:
     image:
       repository: devopslifter/hello-appvia-demo
-      tag: dev-2fe579ebff211b973c62f0515eff06617ef8b8bd
+      tag: dev-e4b674be87b1df470b73cf13b2e4e5871c547ead
     replicaCount: 1
