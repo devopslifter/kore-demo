@@ -1,9 +1,8 @@
----
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
   name: dotnet-hello-world
-  namespace: tmf-ci
+  namespace: dev
   annotations:
     fluxcd.io/automated: "true"
     filter.fluxcd.io/chart-image: glob:dev-*
@@ -11,12 +10,12 @@ spec:
   releaseName: dotnet-hello-world
   chart:
     git: https://github.com/devopslifter/kore-demo
-    path: dotnet-hello-world/release/dev
+    path: charts/dotnet-hello-world
     ref: main
     secretRef:
       name: git-https-credentials
   values:
     image:
       repository: devopslifter/hello-appvia-demo
-      tag: dev-22698939568c24179a20670beb487695cb74619c
+      tag: dev-69958b1993ced8e490ab8a448f62d1444758535d
     replicaCount: 1
